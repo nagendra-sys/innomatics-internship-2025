@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Problem Solving</title>
+    <script>
+        function atmWithdrawal() {
+            let balance = parseFloat(document.getElementById("atmBalance").value);
+            let amount = parseFloat(document.getElementById("atmAmount").value);
+            let pin = "1234";
+            let enteredPin = document.getElementById("atmPin").value;
+            
+            if (enteredPin !== pin) {
+                alert("Incorrect PIN");
+                return;
+            }
+            if (amount > balance) {
+                alert("Insufficient Funds");
+                return;
+            }
+            if (amount % 100 !== 0) {
+                alert("Enter amount in multiples of 100");
+                return;
+            }
+            alert(`Withdrawal successful! Remaining balance: ${balance - amount}`);
+        }
+
+        function calculateFinalAmount() {
+            let orderAmount = parseFloat(document.getElementById("orderAmount").value);
+            let discount = orderAmount > 1000 ? 0.2 : orderAmount >= 500 ? 0.1 : 0;
+            let discountedPrice = orderAmount - orderAmount * discount;
+            let shipping = discountedPrice > 50 ? 0 : 10;
+            alert(`Final Price: ${discountedPrice + shipping}`);
+        }
+
+        function calculateGrade() {
+            let marks = parseInt(document.getElementById("marks").value);
+            let attendance = parseInt(document.getElementById("attendance").value);
+            if (attendance > 90) marks += 5;
+            let grade = marks >= 90 ? "A" : marks >= 80 ? "B" : marks >= 70 ? "C" : marks >= 60 ? "D" : "F";
+            alert("Grade: " + grade);
+        }
+
+        function trafficLightControl() {
+            let density = document.getElementById("trafficDensity").value;
+            let time = density === "Heavy" ? 60 : density === "Moderate" ? 40 : 20;
+            alert(`Green signal for ${time} seconds`);
+        }
+    </script>
+</head>
+<body>
+    <h2>ATM Withdrawal</h2>
+    <input type="number" id="atmBalance" placeholder="Balance">
+    <input type="number" id="atmAmount" placeholder="Amount">
+    <input type="password" id="atmPin" placeholder="PIN">
+    <button onclick="atmWithdrawal()">Withdraw</button>
+
+    <h2>Online Shopping Discount</h2>
+    <input type="number" id="orderAmount" placeholder="Order Amount">
+    <button onclick="calculateFinalAmount()">Calculate</button>
+
+    <h2>Student Grading System</h2>
+    <input type="number" id="marks" placeholder="Marks">
+    <input type="number" id="attendance" placeholder="Attendance %">
+    <button onclick="calculateGrade()">Get Grade</button>
+
+    <h2>Smart Traffic Light</h2>
+    <select id="trafficDensity">
+        <option value="Heavy">Heavy Traffic</option>
+        <option value="Moderate">Moderate Traffic</option>
+        <option value="Light">Light Traffic</option>
+    </select>
+    <button onclick="trafficLightControl()">Check Time</button>
+</body>
+</html>
